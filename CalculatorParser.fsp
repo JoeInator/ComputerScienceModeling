@@ -5,7 +5,7 @@ open CalculatorTypesAST
 
 // Declare the tokens (terminal symbols)
 %token <float> NUM
-%token TIMES DIV PLUS MINUS POW SQRT CUBE LOG LOG10 LPAR RPAR EOF BoolLogicOr BoolLogicAnd LogicOr LogicAnd NOT EQUALS NOTEQUALS LargerThan SmallerThan LargerThanOrEquals SmallerThanOrEquals
+%token TIMES DIV PLUS MINUS POW SQRT CUBE LOG LOG10 LPAR RPAR LSQBR RSQBR EOF BoolLogicOr BoolLogicAnd LogicOr LogicAnd NOT EQUALS NOTEQUALS LargerThan SmallerThan LargerThanOrEquals SmallerThanOrEquals CONDITION VARIABLE ASSIGNVARIABLE LDO RDO LIF RIF SEQUENCING ELSE SKIP PRIMITIVEBOOLEAN
 // NOTE: the actual formats of these tokens are defined in the lexer file
 //       as regular expressions
 
@@ -14,6 +14,7 @@ open CalculatorTypesAST
 //%left PLUS MINUS
 //%left TIMES DIV
 //%right POW
+%right ELSE SEQUENCING
 %left BoolLogicOr LogicOr
 %left BoolLogicAnd LogicAnd
 %nonassoc NOT
@@ -30,6 +31,8 @@ open CalculatorTypesAST
 %type <expr> expression2
 %type <expr> expression3
 %type <boolExpr> boolExpression0
+%type <command> commandExpression
+%type <gaurdedCommands> guardedCommandExpression
 
 
 // Grammar productions
@@ -71,6 +74,8 @@ expression3:
   | PLUS expression3                { UPlusExpr($2)    }
   | MINUS expression3               { UMinusExpr($2)   }
   | NUM                             { Num($1)          }
+  | VARIABLE                        { Variable($1)     }
+  | VARIABLE LSQBR expression0 RSQBR { ArrayValue($3)  }
   | LPAR expression0 RPAR           { $2               }
 
 boolExpression0:
@@ -87,7 +92,18 @@ boolExpression0:
   | expression0 LargerThanOrEquals expression0      { LargerThanOrEqualsExpr($1,$3)   }
   | expression0 SmallerThan expression0             { SmallerThanExpr($1,$3)          }
   | expression0 SmallerThanOrEquals expression0     { SmallerThanOrEqualsExpr($1,$3)  }
+  | PRIMITIVEBOOLEAN                                { TrueOrFalse($1)                 }
 
+commandExpression:
+  | expression0 ASSIGNVARIABLE expression0          { AssignVariableComand($1,$3)     }
+  | SKIP                                            { SkipOperation()                 }
+  | LDO guardedCommandExpression RDO                { ExecuteLoop($2)                 }
+  | LIF guardedCommandExpression RIF                { ExecuteIf($2)                   }
+  | commandExpression SEQUENCING commandExpression  { CommandSequence($1,$3)          }
+
+guardedCommandExpression:
+  | boolExpression0 CONDITION commandExpression           { ExecuteCondition($1,$3) }
+  | guardedCommandExpression ELSE guardedCommandExpression { ExecuteChoice($1,$3)   }
 
 // Again, the code annotation specifies the result of parsing
 // For example { TimesExpr($1,$3) } specifies that parsing with the production

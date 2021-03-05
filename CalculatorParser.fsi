@@ -12,6 +12,8 @@ type token =
   | LOG10
   | LPAR
   | RPAR
+  | LSQBR
+  | RSQBR
   | EOF
   | BoolLogicOr
   | BoolLogicAnd
@@ -24,6 +26,17 @@ type token =
   | SmallerThan
   | LargerThanOrEquals
   | SmallerThanOrEquals
+  | CONDITION
+  | VARIABLE
+  | ASSIGNVARIABLE
+  | LDO
+  | RDO
+  | LIF
+  | RIF
+  | SEQUENCING
+  | ELSE
+  | SKIP
+  | PRIMITIVEBOOLEAN
   | NUM of (float)
 type tokenId = 
     | TOKEN_TIMES
@@ -37,6 +50,8 @@ type tokenId =
     | TOKEN_LOG10
     | TOKEN_LPAR
     | TOKEN_RPAR
+    | TOKEN_LSQBR
+    | TOKEN_RSQBR
     | TOKEN_EOF
     | TOKEN_BoolLogicOr
     | TOKEN_BoolLogicAnd
@@ -49,6 +64,17 @@ type tokenId =
     | TOKEN_SmallerThan
     | TOKEN_LargerThanOrEquals
     | TOKEN_SmallerThanOrEquals
+    | TOKEN_CONDITION
+    | TOKEN_VARIABLE
+    | TOKEN_ASSIGNVARIABLE
+    | TOKEN_LDO
+    | TOKEN_RDO
+    | TOKEN_LIF
+    | TOKEN_RIF
+    | TOKEN_SEQUENCING
+    | TOKEN_ELSE
+    | TOKEN_SKIP
+    | TOKEN_PRIMITIVEBOOLEAN
     | TOKEN_NUM
     | TOKEN_end_of_input
     | TOKEN_error
@@ -60,6 +86,8 @@ type nonTerminalId =
     | NONTERM_expression2
     | NONTERM_expression3
     | NONTERM_boolExpression0
+    | NONTERM_commandExpression
+    | NONTERM_guardedCommandExpression
 /// This function maps tokens to integer indexes
 val tagOfToken: token -> int
 

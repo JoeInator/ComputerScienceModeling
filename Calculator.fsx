@@ -27,6 +27,7 @@ let rec eval e =
     | Log10Expr(x) -> log10(eval(x)) //NEW
     | UPlusExpr(x) -> eval(x)
     | UMinusExpr(x) -> - eval(x)
+    | Variable(x) -> x
 
 let rec evalBool e =
   match e with
@@ -41,6 +42,10 @@ let rec evalBool e =
     | LogicOrExpr(x,y) -> evalBool(x) || evalBool(y)
     | BoolLogicAndExpr(x,y) -> evalBool(x) && evalBool(y)
     | LogicAndExpr(x,y) -> evalBool(x) && evalBool(y)
+
+let rec evalCommand e =
+    match e with
+    |AssignVariableComand(x,y) -> x := y
 
 
 // We
