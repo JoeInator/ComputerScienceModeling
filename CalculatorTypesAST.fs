@@ -16,6 +16,7 @@ type expr =
   | UPlusExpr of (expr)
   | UMinusExpr of (expr)
   | Variable of string
+  | ArrayValue of (string * expr)
 
 type boolExpr =
   | EqualsExpr of (expr * expr)

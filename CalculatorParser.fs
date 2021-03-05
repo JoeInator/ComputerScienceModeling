@@ -478,7 +478,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 71 "CalculatorParser.fsp"
-                                                           _1               
+                                                         _1               
                    )
 # 71 "CalculatorParser.fsp"
                  : expr));
@@ -532,7 +532,7 @@ let _fsyacc_reductions ()  =    [|
                 (
                    (
 # 78 "CalculatorParser.fsp"
-                                                            ArrayValue(_3)  
+                                                            ArrayValue(_1,_3)  
                    )
 # 78 "CalculatorParser.fsp"
                  : expr));
