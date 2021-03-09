@@ -12,7 +12,6 @@ let digit       = ['0'-'9']
 let num         = digit+ ( '.' digit+)?  ('E' ('+'|'-')? digit+ )?
 let whitespace  = [' ' '\t']
 let newline     = "\n\r" | '\n' | '\r'
-let variable    = ['a'-'z''A'-'Z'] (['a'-'z''A'-'Z'] | digit | '_')*
 let primitiveBoolValue = "true" | "false"
 
 // We define now the rules for recognising and building tokens
@@ -35,12 +34,12 @@ rule tokenize = parse
 | "logten"      { LOG10 } //NEW
 | '^'           { POW }
 | '('           { LPAR }
-| ')'           { RPAR }
+| ')'           { RPAR } 
 | '['           { LSQBR }
 | ']'           { RSQBR }
-| variable      { VARIABLE(LexBuffer<_>.LexemeString lexbuf) }
+| ['a'-'z''A'-'Z']+      { ID (LexBuffer<_>.LexemeString lexbuf) }
 // booleans
-| primitiveBoolValue  { PRIMITIVEBOOLEAN }
+//| primitiveBoolValue  { PRIMITIVEBOOLEAN (LexBuffer<_>.LexemeString lexbuf) }
 | '|'           { BoolLogicOr }
 | '&'           { BoolLogicAnd }
 | "||"          { LogicOr }
@@ -55,10 +54,10 @@ rule tokenize = parse
 // commands
 | ":="          { ASSIGNVARIABLE }
 | "skip"        { SKIP }
-| "do"          { LDO }
-| "od"          { RDO }
-| "if"          { LIF }
-| "fi"          { RIF }
+| "do "         { LDO }
+| " od"         { RDO }
+| "if "         { LIF }
+| " fi"         { RIF }
 | ";"           { SEQUENCING }
 // guarded commands
 | "->"          { CONDITION }

@@ -13,6 +13,7 @@ open CalculatorLexer
 
 // We define the evaluation function recursively, by induction on the structure
 // of arithmetic expressions (AST of type expr)
+(* 
 let rec eval e =
   match e with
     | Num(x) -> x
@@ -27,7 +28,8 @@ let rec eval e =
     | Log10Expr(x) -> log10(eval(x)) //NEW
     | UPlusExpr(x) -> eval(x)
     | UMinusExpr(x) -> - eval(x)
-    | Variable(x) -> x
+    // | Variable(x) -> x
+    // | ArrayValue(x,y) -> x[y]
 
 let rec evalBool e =
   match e with
@@ -42,12 +44,8 @@ let rec evalBool e =
     | LogicOrExpr(x,y) -> evalBool(x) || evalBool(y)
     | BoolLogicAndExpr(x,y) -> evalBool(x) && evalBool(y)
     | LogicAndExpr(x,y) -> evalBool(x) && evalBool(y)
-
-let rec evalCommand e =
-    match e with
-    |AssignVariableComand(x,y) -> x := y
-
-
+ *)
+ 
 // We
 let parse input =
     // translate string into a buffer of characters
@@ -67,8 +65,9 @@ let rec compute n =
         // We parse the input string
         let e = parse (Console.ReadLine())
         // and print the result of evaluating it -- For now, the type of e can be set on the last line of CalculatorParser.fs
+        printfn "Thats a valid program"
         //printfn "Result: %f" (eval(e))
-        printfn "Result: %b" (evalBool(e))
+        //printfn "Result: %b" (evalBool(e))
         compute n
         with err -> 
             printf "Syntax error\n"

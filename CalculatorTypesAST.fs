@@ -15,7 +15,7 @@ type expr =
   | Log10Expr of (expr)
   | UPlusExpr of (expr)
   | UMinusExpr of (expr)
-  | Variable of string
+  | Variable of (string)
   | ArrayValue of (string * expr)
 
 type boolExpr =
@@ -30,15 +30,15 @@ type boolExpr =
   | BoolLogicAndExpr of (boolExpr * boolExpr)
   | LogicOrExpr of (boolExpr * boolExpr)
   | LogicAndExpr of (boolExpr * boolExpr)
-  | TrueOrFalse of (boolExpr)
+  //| TrueOrFalse of (boolExpr)
 
-type gaurdedCommands = 
-  | ExecuteCondition of (boolExpr * command)
-  | ExecuteChoice of (gaurdedCommands * gaurdedCommands)
-
-type command =
-  | AssignVariableComand of (expr * expr)
-  | SkipOperation()
+type commands =
+  | AssignVariableCommand of (string * expr)
+  | AssignArrayValue of (string * expr * expr)
+  | SkipOperation
   | ExecuteLoop of (gaurdedCommands)
   | ExecuteIf of (gaurdedCommands)
-  | CommandSequence of (command * command)
+  | CommandSequence of (commands * commands)
+and gaurdedCommands = 
+  | ExecuteCondition of (boolExpr * commands)
+  | ExecuteChoice of (gaurdedCommands * gaurdedCommands)
