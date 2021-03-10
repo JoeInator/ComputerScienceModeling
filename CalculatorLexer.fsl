@@ -12,7 +12,7 @@ let digit       = ['0'-'9']
 let num         = digit+ ( '.' digit+)?  ('E' ('+'|'-')? digit+ )?
 let whitespace  = [' ' '\t']
 let newline     = "\n\r" | '\n' | '\r'
-let primitiveBoolValue = "true" | "false"
+let primBoolValue = "true" | "false"
 
 // We define now the rules for recognising and building tokens
 // for each of the tokens of our language we need a rule
@@ -37,9 +37,10 @@ rule tokenize = parse
 | ')'           { RPAR } 
 | '['           { LSQBR }
 | ']'           { RSQBR }
-| ['a'-'z''A'-'Z']+      { ID (LexBuffer<_>.LexemeString lexbuf) }
+| "skip"        { SKIP }
+| primBoolValue { PRIMBOOLEAN (LexBuffer<_>.LexemeString lexbuf) }
+| ['a'-'z''A'-'Z']['a'-'z''A'-'Z''0'-'9''_']*      { ID (LexBuffer<_>.LexemeString lexbuf) }
 // booleans
-//| primitiveBoolValue  { PRIMITIVEBOOLEAN (LexBuffer<_>.LexemeString lexbuf) }
 | '|'           { BoolLogicOr }
 | '&'           { BoolLogicAnd }
 | "||"          { LogicOr }
@@ -53,7 +54,6 @@ rule tokenize = parse
 | "<="          { SmallerThanOrEquals }
 // commands
 | ":="          { ASSIGNVARIABLE }
-| "skip"        { SKIP }
 | "do "         { LDO }
 | " od"         { RDO }
 | "if "         { LIF }

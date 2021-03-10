@@ -30,7 +30,7 @@ type boolExpr =
   | BoolLogicAndExpr of (boolExpr * boolExpr)
   | LogicOrExpr of (boolExpr * boolExpr)
   | LogicAndExpr of (boolExpr * boolExpr)
-  //| TrueOrFalse of (boolExpr)
+  | TrueOrFalse of (string)
 
 type commands =
   | AssignVariableCommand of (string * expr)

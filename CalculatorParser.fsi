@@ -9,7 +9,6 @@ type token =
   | SEQUENCING
   | ELSE
   | SKIP
-  | PRIMITIVEBOOLEAN
   | BoolLogicOr
   | BoolLogicAnd
   | LogicOr
@@ -37,6 +36,7 @@ type token =
   | RSQBR
   | EOF
   | ID of (string)
+  | PRIMBOOLEAN of (string)
   | NUM of (float)
 type tokenId = 
     | TOKEN_ASSIGNVARIABLE
@@ -47,7 +47,6 @@ type tokenId =
     | TOKEN_SEQUENCING
     | TOKEN_ELSE
     | TOKEN_SKIP
-    | TOKEN_PRIMITIVEBOOLEAN
     | TOKEN_BoolLogicOr
     | TOKEN_BoolLogicAnd
     | TOKEN_LogicOr
@@ -75,6 +74,7 @@ type tokenId =
     | TOKEN_RSQBR
     | TOKEN_EOF
     | TOKEN_ID
+    | TOKEN_PRIMBOOLEAN
     | TOKEN_NUM
     | TOKEN_end_of_input
     | TOKEN_error

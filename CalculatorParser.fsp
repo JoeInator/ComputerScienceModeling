@@ -5,10 +5,10 @@ open CalculatorTypesAST
 
 // Declare the tokens (terminal symbols)
 %token <float> NUM
-%token <string> ID
+%token <string> ID PRIMBOOLEAN
 %token TIMES DIV PLUS MINUS POW SQRT CUBE LOG LOG10 LPAR RPAR LSQBR RSQBR EOF 
 %token BoolLogicOr BoolLogicAnd LogicOr LogicAnd NOT EQUALS NOTEQUALS LargerThan SmallerThan LargerThanOrEquals SmallerThanOrEquals CONDITION 
-%token ASSIGNVARIABLE LDO RDO LIF RIF SEQUENCING ELSE SKIP PRIMITIVEBOOLEAN
+%token ASSIGNVARIABLE LDO RDO LIF RIF SEQUENCING ELSE SKIP
 // NOTE: the actual formats of these tokens are defined in the lexer file
 //       as regular expressions
 
@@ -95,7 +95,7 @@ boolExpression0:
   | expression0 LargerThanOrEquals expression0      { LargerThanOrEqualsExpr($1,$3)   }
   | expression0 SmallerThan expression0             { SmallerThanExpr($1,$3)          }
   | expression0 SmallerThanOrEquals expression0     { SmallerThanOrEqualsExpr($1,$3)  }
-  //| PRIMITIVEBOOLEAN                                { TrueOrFalse($1)                 }
+  | PRIMBOOLEAN                                     { TrueOrFalse($1)                 }
 
 commandExpression:
   | ID ASSIGNVARIABLE expression0                   { AssignVariableCommand($1,$3)    }
