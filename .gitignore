@@ -3,3 +3,7 @@
 /FSharp.Core.4.3.4
 
 Commands.txt
+Program.fs
+CalculatorLexer.fs
+CalculatorParser.fs
+CalculatorParser.fsi
