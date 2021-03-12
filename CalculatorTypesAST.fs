@@ -36,9 +36,9 @@ type commands =
   | AssignVariableCommand of (string * expr)
   | AssignArrayValue of (string * expr * expr)
   | SkipOperation
-  | ExecuteLoop of (gaurdedCommands)
-  | ExecuteIf of (gaurdedCommands)
+  | ExecuteLoop of (guardedCommands)
+  | ExecuteIf of (guardedCommands)
   | CommandSequence of (commands * commands)
-and gaurdedCommands = 
+and guardedCommands = 
   | ExecuteCondition of (boolExpr * commands)
-  | ExecuteChoice of (gaurdedCommands * gaurdedCommands)
+  | ExecuteChoice of (guardedCommands * guardedCommands)
