@@ -35,7 +35,7 @@ open CalculatorTypesAST
 %type <expr> expression3
 %type <boolExpr> boolExpression0
 %type <commands> commandExpression
-%type <gaurdedCommands> guardedCommandExpression
+%type <guardedCommands> guardedCommandExpression
 
 
 // Grammar productions

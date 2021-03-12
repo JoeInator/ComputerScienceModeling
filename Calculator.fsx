@@ -10,6 +10,8 @@ open CalculatorTypesAST
 open CalculatorParser
 #load "CalculatorLexer.fs"
 open CalculatorLexer
+#load "ProgramGraph.fsx"
+open ProgramGraph
 
 // We define the evaluation function recursively, by induction on the structure
 // of arithmetic expressions (AST of type expr)
@@ -66,6 +68,8 @@ let rec compute n =
         let e = parse (Console.ReadLine())
         // and print the result of evaluating it -- For now, the type of e can be set on the last line of CalculatorParser.fs
         printfn "Thats a valid program"
+        let programGraph = edgesCmd(0, -1, e)
+        printfn "Grapf: %A" (programGraph)
         //printfn "Result: %f" (eval(e))
         //printfn "Result: %b" (evalBool(e))
         compute n
