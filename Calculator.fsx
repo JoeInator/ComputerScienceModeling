@@ -62,17 +62,18 @@ let rec compute n =
     if n = 0 then
         printfn "Bye bye"
     else
-        printf "Enter an arithmetic expression: "
+        printf "Enter a command: "
         try
         // We parse the input string
         let e = parse (Console.ReadLine())
         // and print the result of evaluating it -- For now, the type of e can be set on the last line of CalculatorParser.fs
         printfn "Thats a valid program"
+
+        //The following is for Assignment 2
         let programGraph = edgesCmd(0, -1, e)
-        printfn "Arraylength: %d" (programGraph.Length)
-        printfn "Grapf: %A" (programGraph)
-        //printfn "Result: %f" (eval(e))
-        //printfn "Result: %b" (evalBool(e))
+        (* printfn "Arraylength: %d" (programGraph.Length)
+        printfn "Grapf: %A" (programGraph) *)
+
         compute n
         with err -> 
             printf "Syntax error\n"
