@@ -69,6 +69,7 @@ let rec compute n =
         // and print the result of evaluating it -- For now, the type of e can be set on the last line of CalculatorParser.fs
         printfn "Thats a valid program"
         let programGraph = edgesCmd(0, -1, e)
+        printfn "Arraylength: %d" (programGraph.Length)
         printfn "Grapf: %A" (programGraph)
         //printfn "Result: %f" (eval(e))
         //printfn "Result: %b" (evalBool(e))
