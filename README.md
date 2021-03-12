@@ -16,8 +16,13 @@ FsLexYacc.10.0.0/build/fsyacc/net46/fsyacc.exe CalculatorParser.fsp --module Cal
 ```
 That will generate the three files ```CalculatorLexer.fs, CalculatorParser.fs``` and ```CalculatorParser.fsi``` which are crucial for the progam to execute.
 
+Lastly, run the following command to start the program
+ ```
+ fsi Calculator.fsx
+ ```
 ## Examine the project
 For this assignment, there 4 important files.
 1. ```CalculatorParser.fs``` which handles the input based on defined patterns with the specified tokens
 2. ```CalculatorLexer.fs``` which matches the input keywords and special characters to a specified token
 3. ```CalculatorTypesAST.fs``` which contains the abstract syntax that are assigned the appropiate pattern in ```CalculatorParser.fs```
+4. ```Calculator.fsx``` which reads the given input, and initiates the parser and the lexer to evaluate it.
