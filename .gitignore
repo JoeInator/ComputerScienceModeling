@@ -1,8 +1,9 @@
 
 Commands.txt
-Program.fs
+Program.fsx
 CalculatorLexer.fs
 CalculatorParser.fs
 CalculatorParser.fsi
 graph.gv
+test.gv
 run.sh
