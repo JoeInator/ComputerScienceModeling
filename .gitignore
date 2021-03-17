@@ -4,3 +4,5 @@ Program.fs
 CalculatorLexer.fs
 CalculatorParser.fs
 CalculatorParser.fsi
+graph.gv
+run.sh

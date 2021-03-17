@@ -67,12 +67,12 @@ let rec compute n =
         // We parse the input string
         let e = parse (Console.ReadLine())
         // and print the result of evaluating it -- For now, the type of e can be set on the last line of CalculatorParser.fs
-        printfn "Thats a valid program"
-
+        
         //The following is for Assignment 2
         let programGraph = edgesCmd(0, -1, e)
-        (* printfn "Arraylength: %d" (programGraph.Length)
-        printfn "Grapf: %A" (programGraph) *)
+        printfn "Arraylength: %d" (programGraph.Length)
+        printfn "Grapf: %A" (programGraph)
+        printfn "Thats a valid program"
 
         compute n
         with err -> 
@@ -80,4 +80,4 @@ let rec compute n =
             compute (n-1)
 
 // Start interacting with the user
-compute 3
+compute 2

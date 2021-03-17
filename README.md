@@ -17,10 +17,15 @@ FsLexYacc.10.0.0/build/fsyacc/net46/fsyacc.exe CalculatorParser.fsp --module Cal
 That will generate the three files ```CalculatorLexer.fs, CalculatorParser.fs``` and ```CalculatorParser.fsi``` which are crucial for the progam to execute.
 
 Lastly, run the following command to start the program
- ```
- fsi Calculator.fsx
- ```
-## Examine the project
+```
+fsi Calculator.fsx
+```
+## Assignment 2
+### Known probems/issues:
+1. ProgramGraph.fsx makes the middle object of the 3-tuple into strings so they alle match with the same type. This might turn to be an inappropiate setting later.
+2. The matching type problem need to be fixed
+## Assignment 1
+### Examine the project
 For this assignment, there 4 important files.
 1. ```CalculatorParser.fs``` which handles the input based on defined patterns with the specified tokens
 2. ```CalculatorLexer.fs``` which matches the input keywords and special characters to a specified token
