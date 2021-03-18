@@ -6,4 +6,3 @@ CalculatorParser.fs
 CalculatorParser.fsi
 graph.gv
 test.gv
-run.sh
