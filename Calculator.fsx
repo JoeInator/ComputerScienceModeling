@@ -12,6 +12,8 @@ open CalculatorParser
 open CalculatorLexer
 #load "ProgramGraph.fsx"
 open ProgramGraph
+#load "PopulateFile.fsx"
+open PopulateFile
 
 // We define the evaluation function recursively, by induction on the structure
 // of arithmetic expressions (AST of type expr)
@@ -72,6 +74,7 @@ let rec compute n =
         let programGraph = edgesCmd(0, -1, e)
         printfn "Arraylength: %d" (programGraph.Length)
         printfn "Grapf: %A" (programGraph)
+        WriteFile(programGraph)
         printfn "Thats a valid program"
 
         compute n
