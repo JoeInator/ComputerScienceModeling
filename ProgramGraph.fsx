@@ -13,29 +13,29 @@ let array:List<int * 'T *int> = []
 let rec edgesExpr (expr) =
  match expr with
   | Num(x) -> x.ToString()
-  | PlusExpr(x,y) -> x.ToString()+"+"+y.ToString()
-  | TimesExpr(x,y) -> x.ToString()+"*"+y.ToString()
-  | DivExpr(x,y) -> x.ToString()+"/"+y.ToString()
-  | MinusExpr(x,y) -> x.ToString()+"-"+y.ToString()
-  | PowExpr(x,y) -> x.ToString()+"^"+y.ToString()
+  | PlusExpr(x,y) -> edgesExpr(x)+"+"+edgesExpr(y)
+  | TimesExpr(x,y) -> edgesExpr(x)+"*"+edgesExpr(y)
+  | DivExpr(x,y) -> edgesExpr(x)+"/"+edgesExpr(y)
+  | MinusExpr(x,y) -> edgesExpr(x)+"-"+edgesExpr(y)
+  | PowExpr(x,y) -> edgesExpr(x)+"^"+edgesExpr(y)
   | SqrtExpr(x) -> failwith "Not relevant"
   | CubeExpr(x) -> failwith "Not relevant"
   | LogExpr(x) -> failwith "Not relevant"
   | Log10Expr(x) -> failwith "Not relevant"
-  | UPlusExpr(x) -> "+"+x.ToString()
-  | UMinusExpr(x) -> "-"+x.ToString()
+  | UPlusExpr(x) -> "+"+edgesExpr(x)
+  | UMinusExpr(x) -> "-"+edgesExpr(x)
   | Variable(x) -> x.ToString()
   | ArrayValue(x,y) -> x+"["+edgesExpr(y)+"]"
 
 let rec edgesBool (BE) =
  match BE with
-  | EqualsExpr(x,y) -> edgesExpr(x).ToString()+"="+edgesExpr(y).ToString()
-  | NotEqualsExpr(x,y) -> edgesExpr(x).ToString()+"!="+edgesExpr(y).ToString()
-  | LargerThanExpr(x,y) -> edgesExpr(x).ToString()+">"+edgesExpr(y).ToString()
-  | LargerThanOrEqualsExpr(x,y) -> edgesExpr(x).ToString()+">="+edgesExpr(y).ToString()
-  | SmallerThanExpr(x,y) -> edgesExpr(x).ToString()+"<"+edgesExpr(y).ToString()
-  | SmallerThanOrEqualsExpr(x,y) -> edgesExpr(x).ToString()+"<="+edgesExpr(y).ToString()
-  | NOTExpr(x) -> "!"+edgesBool(x)
+  | EqualsExpr(x,y) -> edgesExpr(x)+"="+edgesExpr(y)
+  | NotEqualsExpr(x,y) -> edgesExpr(x)+"!="+edgesExpr(y)
+  | LargerThanExpr(x,y) -> edgesExpr(x)+">"+edgesExpr(y)
+  | LargerThanOrEqualsExpr(x,y) -> edgesExpr(x)+">="+edgesExpr(y)
+  | SmallerThanExpr(x,y) -> edgesExpr(x)+"<"+edgesExpr(y)
+  | SmallerThanOrEqualsExpr(x,y) -> edgesExpr(x)+"<="+edgesExpr(y)
+  | NOTExpr(x) -> "!("+edgesBool(x)+")"
   | BoolLogicOrExpr(x,y) -> edgesBool(x)+"|"+edgesBool(y)
   | BoolLogicAndExpr(x,y) -> edgesBool(x)+"&"+edgesBool(y)
   | LogicOrExpr(x,y) -> edgesBool(x)+"||"+edgesBool(y)
@@ -61,7 +61,7 @@ and edgesGC (src:int, sink:int, GC) =
                              //let edges1 = edgesBool(src, nodeCount, x)
                              let edges1 = [(src, edgesBool(x), nodeCount)]
                              let edges2 = edgesCmd(nodeCount, sink, y)
-                             in List.concat [edges1; edges2]  //TODO: We need to append the edges1 somehow, but it's has a bad type (boolExpr)
+                             in List.concat [edges1; edges2]
                              //edges2
   | ExecuteChoice(x,y) ->   let edges1 = edgesGC(src, sink, x)  
                             let edges2 = edgesGC(src, sink, y)
