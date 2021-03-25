@@ -8,7 +8,8 @@ open CalculatorParser
 open CalculatorLexer
 
 let mutable nodeCount = 0
-let array:List<int * 'T *int> = []
+let mutable CmdArray:List<int * commands *int> = []
+let mutable TestArray:List<int * boolExpr * int> = []
 
 let rec edgesExpr (expr) =
  match expr with
@@ -44,38 +45,48 @@ let rec edgesBool (BE) =
 
 let rec edgesCmd (src:int, sink:int, commands) =
  match commands with
-  | AssignVariableCommand(x,y) -> [(src, x+":="+edgesExpr(y), sink)]
-  | AssignArrayValue(x,y,z) -> [(src, x+"["+edgesExpr(y)+"]:="+edgesExpr(z), sink)]
-  | SkipOperation -> [(src, "skip", sink)]
-  | ExecuteLoop(x) -> List.concat [edgesGC(src, src, x); [(src, DONEGUARD(x), sink)]]
-  | ExecuteIf(x) -> edgesGC(src, sink, x) //failwith "Not Implemented"
+  | AssignVariableCommand(x,y) -> CmdArray <- CmdArray @ [(src, commands, sink)]
+                                  ()
+  | AssignArrayValue(x,y,z) -> CmdArray <- CmdArray @ [(src, commands, sink)]
+                               ()
+  | SkipOperation -> CmdArray <- CmdArray @ [(src, commands, sink)]
+                     ()
+  | ExecuteLoop(x) -> edgesGC(src, src, x)
+                      TestArray <- TestArray @ [(src, DONEGUARD(x), sink)]
+                      ()
+  | ExecuteIf(x) -> edgesGC(src, sink, x)
+                    ()//edgesGC(src, sink, x) //failwith "Not Implemented"
   | CommandSequence(x,y) -> nodeCount<-nodeCount+1
                             let edges1 = edgesCmd(src, nodeCount, x)  
                             let edges2 = edgesCmd(nodeCount, sink, y)
-                            in List.concat [edges1;edges2]
+                            ()
 
 and edgesGC (src:int, sink:int, GC) =
  match GC with
   | ExecuteCondition(x,y) -> //edgesCmd(nodeCount, sink, y)
                              nodeCount<-nodeCount+1;
                              //let edges1 = edgesBool(src, nodeCount, x)
-                             let edges1 = [(src, edgesBool(x), nodeCount)]
+                             TestArray <- TestArray @ [(src, x, nodeCount)]
                              let edges2 = edgesCmd(nodeCount, sink, y)
-                             in List.concat [edges1; edges2]
+                             ()
                              //edges2
   | ExecuteChoice(x,y) ->   let edges1 = edgesGC(src, sink, x)  
                             let edges2 = edgesGC(src, sink, y)
-                            in List.concat [edges1; edges2] 
+                            ()
 
-and DONEGUARD (GC) : string =
+and DONEGUARD (GC) =
  match GC with
- | ExecuteCondition(x,y) -> edgesBool(NOTExpr(x))
- | ExecuteChoice(_) -> failwith "Not Implemented"
- (* | ExecuteChoice(x, y) ->  let invBool1 = DONEGUARD(x)
-                           let invBool2 = DONEGUARD(y)
-                           edgesBool(BoolLogicAndExpr(invBool1, invBool2)) *)
+ | ExecuteCondition(x,y) -> NOTExpr(x)
+ | ExecuteChoice(x,y) -> BoolLogicAndExpr(DONEGUARD(x), DONEGUARD(y))
+ 
 //variable, array, bool
 //F# type expression
 // Set of tuples(start end label)
 
 //Node gen: let mutable count := 0 count <- count+1
+
+let genPG e =
+  CmdArray <- []
+  TestArray <- []
+  edgesCmd (0, -1, e)
+  (CmdArray, TestArray)

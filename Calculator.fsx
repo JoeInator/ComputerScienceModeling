@@ -14,42 +14,12 @@ open CalculatorLexer
 open ProgramGraph
 #load "PopulateFile.fsx"
 open PopulateFile
+#load "Interpreter.fsx"
+open Interpreter
 
 // We define the evaluation function recursively, by induction on the structure
 // of arithmetic expressions (AST of type expr)
-(* 
-let rec eval e =
-  match e with
-    | Num(x) -> x
-    | TimesExpr(x,y) -> eval(x) * eval (y)
-    | DivExpr(x,y) -> eval(x) / eval (y)
-    | PlusExpr(x,y) -> eval(x) + eval (y)
-    | MinusExpr(x,y) -> eval(x) - eval (y)
-    | PowExpr(x,y) -> eval(x) ** eval (y)
-    | SqrtExpr(x) -> sqrt(eval(x)) //NEW
-    | CubeExpr(x) -> eval(x) ** 3.0 //NEW
-    | LogExpr(x) -> log(eval(x)) //NEW
-    | Log10Expr(x) -> log10(eval(x)) //NEW
-    | UPlusExpr(x) -> eval(x)
-    | UMinusExpr(x) -> - eval(x)
-    // | Variable(x) -> x
-    // | ArrayValue(x,y) -> x[y]
 
-let rec evalBool e =
-  match e with
-    | EqualsExpr(x,y) -> eval(x) = eval(y)
-    | NotEqualsExpr(x,y) -> eval(x) <> eval(y)
-    | LargerThanExpr(x,y) -> eval(x) > eval(y)
-    | LargerThanOrEqualsExpr(x,y) -> eval(x) >= eval(y)
-    | SmallerThanExpr(x,y) -> eval(x) < eval(y)
-    | SmallerThanOrEqualsExpr(x,y) -> eval(x) <= eval(y)
-    | NOTExpr(x) -> not(evalBool(x))
-    | BoolLogicOrExpr(x,y) -> evalBool(x) || evalBool(y)
-    | LogicOrExpr(x,y) -> evalBool(x) || evalBool(y)
-    | BoolLogicAndExpr(x,y) -> evalBool(x) && evalBool(y)
-    | LogicAndExpr(x,y) -> evalBool(x) && evalBool(y)
- *)
- 
 // We
 let parse input =
     // translate string into a buffer of characters
@@ -67,16 +37,24 @@ let rec compute n =
         printf "Enter a command: "
         try
         // We parse the input string
-        let e = parse (Console.ReadLine())
+        //printfn "MAP: %A" (dom)
+        printfn "write the initial variable configuration separating them with a semicolon e.g\n
+        a = 2; b = 5; A=[1, 5, 8, 2, 5, 6]"
+        let variables = Console.ReadLine()
+        printfn "Now write your program to be executed"
+        let program = parse (Console.ReadLine())
         // and print the result of evaluating it -- For now, the type of e can be set on the last line of CalculatorParser.fs
-        
-        //The following is for Assignment 2
-        let programGraph = edgesCmd(0, -1, e)
-        printfn "Arraylength: %d" (programGraph.Length)
-        printfn "Grapf: %A" (programGraph)
-        WriteFile(programGraph)
-        printfn "Thats a valid program"
 
+        //The following is for Assignment 2
+        let programGraph = genPG(program)
+        let CMD, TEST = programGraph
+        printfn "Arraylength: %d" (CMD.Length + TEST.Length)
+        printfn "Grapf: %A" (programGraph)
+        (*//WriteFile(programGraph) *)
+        //Interpreter.execInterpreter(program, variables)
+        
+        printfn "Thats a valid program"
+        //evalCmd(e) |>
         compute n
         with err -> 
             printf "Syntax error\n"
