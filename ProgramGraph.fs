@@ -1,11 +1,6 @@
-
+module ProgramGraph
 open System
-#load "CalculatorTypesAST.fs"
 open CalculatorTypesAST
-#load "CalculatorParser.fs"
-open CalculatorParser
-#load "CalculatorLexer.fs"
-open CalculatorLexer
 
 let mutable nodeCount = 0
 let mutable CmdArray:List<int * commands *int> = []

@@ -6,6 +6,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="CalculatorTypesAST.fs"/>
+    <Compile Include="FsLexYacc.10.0.0\src\fslex\Lexing.fs" />
+    <Compile Include="FsLexYacc.10.0.0\src\fsyacc\Parsing.fs" />
+    <Compile Include="CalculatorParser.fs"/>
+    <Compile Include="CalculatorLexer.fs"/>
+    <Compile Include="ProgramGraph.fs"/>
+    <Compile Include="PopulateFile.fs"/>
+    <Compile Include="Interpreter.fs"/>
     <Compile Include="Program.fs" />
   </ItemGroup>
 
