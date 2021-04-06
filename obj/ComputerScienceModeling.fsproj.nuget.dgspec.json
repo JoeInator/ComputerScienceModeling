@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jon.it-minds.dk\\DTU - Computer Science Modelling\\ComputerScienceModeling\\ComputerScienceModeling\\ComputerScienceModeling.fsproj": {}
+    "C:\\Users\\jon.it-minds.dk\\DTU - Computer Science Modelling\\ComputerScienceModeling\\ComputerScienceModeling.fsproj": {}
   },
   "projects": {
-    "C:\\Users\\jon.it-minds.dk\\DTU - Computer Science Modelling\\ComputerScienceModeling\\ComputerScienceModeling\\ComputerScienceModeling.fsproj": {
+    "C:\\Users\\jon.it-minds.dk\\DTU - Computer Science Modelling\\ComputerScienceModeling\\ComputerScienceModeling.fsproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jon.it-minds.dk\\DTU - Computer Science Modelling\\ComputerScienceModeling\\ComputerScienceModeling\\ComputerScienceModeling.fsproj",
+        "projectUniqueName": "C:\\Users\\jon.it-minds.dk\\DTU - Computer Science Modelling\\ComputerScienceModeling\\ComputerScienceModeling.fsproj",
         "projectName": "ComputerScienceModeling",
-        "projectPath": "C:\\Users\\jon.it-minds.dk\\DTU - Computer Science Modelling\\ComputerScienceModeling\\ComputerScienceModeling\\ComputerScienceModeling.fsproj",
+        "projectPath": "C:\\Users\\jon.it-minds.dk\\DTU - Computer Science Modelling\\ComputerScienceModeling\\ComputerScienceModeling.fsproj",
         "packagesPath": "C:\\Users\\jon.it-minds.dk\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jon.it-minds.dk\\DTU - Computer Science Modelling\\ComputerScienceModeling\\ComputerScienceModeling\\obj\\",
+        "outputPath": "C:\\Users\\jon.it-minds.dk\\DTU - Computer Science Modelling\\ComputerScienceModeling\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -59,7 +59,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "OjbR/sb28d3u7s1OR+/zywHVzwotQwBttsDF3AB8K9N9DVbrAfz0spKtD0U3u5qo2NN4SV62csk7Q/Ofc6UP/Q==",
+  "dgSpecHash": "1m8CAgpYW5fCzzh3EDx1LAEskrazce919xY6ZBZ9LFYN7Y/vEqKrIPEpUPJKGZsHmAhRTZ/3lsWmAJle46yQ2Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\jon.it-minds.dk\\DTU - Computer Science Modelling\\ComputerScienceModeling\\ComputerScienceModeling\\ComputerScienceModeling.fsproj",
+  "projectFilePath": "C:\\Users\\jon.it-minds.dk\\DTU - Computer Science Modelling\\ComputerScienceModeling\\ComputerScienceModeling.fsproj",
   "expectedPackageFiles": [
     "C:\\Users\\jon.it-minds.dk\\.nuget\\packages\\fsharp.core\\5.0.0\\fsharp.core.5.0.0.nupkg.sha512"
   ],
