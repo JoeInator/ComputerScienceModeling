@@ -42,9 +42,7 @@ let rec compute n =
   try
    // We parse the input string
    //printfn "MAP: %A" (dom)
-   printfn
-       "write the initial variable configuration separating them with a semicolon e.g\n
-a = 2; b = 5; A=[1, 5, 8, 2, 5, 6]"
+   printfn "write the initial variable configuration separating them with a semicolon e.g\na = 2; b = 5; A=[1, 5, 8, 2, 5, 6]"
 
    let variables = Console.ReadLine()
    printfn "Now write your program to be executed"
@@ -58,7 +56,7 @@ a = 2; b = 5; A=[1, 5, 8, 2, 5, 6]"
    printfn "Grapf: %A" (programGraph)
    
    //InterpretPG(TEST, CMD, variables)
-   // do a>0 -> b:=b+A[a]; a:=a-1 [] a=0 -> b:=1000 od
+   // do a > 0 -> b := b + A [a] ; a := a - 1 [] a = 0 -> b := 1000 od
    let vars = "a = 5; b = 5; A=[1, 5, 8, 2, 5, 6]"
 
    let testProg =
@@ -78,16 +76,15 @@ a = 2; b = 5; A=[1, 5, 8, 2, 5, 6]"
      [ (0, LargerThanExpr(Variable "a", Num 0.0), 1);
        (0, NOTExpr (LargerThanExpr (Variable "a", Num 0.0)), -1);
        (6, NOTExpr (LargerThanExpr (Variable "a", Num 0.0)), -1)])
-   //WriteFile2(programGraph)
+   WriteFile2(programGraph)
    let CMD, TEST = testPG
-   InterpretPG(programGraph, vars)
+   InterpretPG(programGraph, variables)
    printfn "Thats a valid program"
-   compute n
   with err ->
-   printf "Syntax error\n"
-   compute (n - 1)
+   printf "Syntax error\n%s" err.Message;
+  printfn "Do you want to go again?? y/n"
+  if Console.ReadLine() = "y" then compute 1 else compute 0
 
 // Start interacting with the user
-compute 2
-
-//Fixes: 
+printfn "Start calculator?? y/n"
+if Console.ReadLine() = "y" then compute 1 else compute 0

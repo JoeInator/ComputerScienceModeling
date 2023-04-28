@@ -4,5 +4,5 @@ Program.fsx
 CalculatorLexer.fs
 CalculatorParser.fs
 CalculatorParser.fsi
-graph.gv
-test.gv
+*.dot
+*.gv

@@ -48,6 +48,7 @@ let rec edgesCmd (commands) =
 
 let WriteFile2(PG:List<int * commands * int> * List<int * boolExpr * int>) =
  //Open a stringbuilder to construct the file content before pusing it.
+ printfn "Writing"
  sb.Clear() |> ignore
  //Sets the first line, that are always the same
  sb.Append("digraph program_graph {rankdir=LR;
@@ -85,7 +86,7 @@ let WriteFile2(PG:List<int * commands * int> * List<int * boolExpr * int>) =
   sb.AppendFormat("q{0} -> q{1} [label = \"{2}\"]\n", src, sink, edgesBool(content)) |> ignore
  sb.Append("}")|> ignore
 
- File.WriteAllText("test.gv", sb.ToString())
+ File.WriteAllText("test.dot", sb.ToString())
 
 let WriteFile(PG:seq<int * string * int>) =
  //Open a stringbuilder to construct the file content before pusing it.
@@ -127,4 +128,4 @@ let testPG =
          NOTExpr(EqualsExpr(Variable "a", Num 0.0))
         ),
         -1) ])
-//WriteFile2(testPG)
+// WriteFile2(testPG)

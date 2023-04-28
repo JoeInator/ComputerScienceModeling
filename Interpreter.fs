@@ -17,7 +17,7 @@ let mutable node = 0
 let addToMap(variable: string, value: float) =
  let alreadythere = dom.TryFind(variable)
  match alreadythere with
- /// You aren't allowed add the same variable twice
+ // You aren't allowed add the same variable twice
  | Some value -> failwithf "varible \"%s\" defined twice in initial configuration" variable
  | None -> dom <- dom.Add(variable, value)
 
